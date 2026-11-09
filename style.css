@@ -12,6 +12,13 @@
 
 html { scroll-behavior: smooth; }
 
+/* iOS Safari ignores overflow-x on <body>, so anything poking past the edge
+   (zooming hero slides, the off-screen mobile menu) let the page pan sideways.
+   Hidden on <html> applies to the viewport; body uses `clip` so it doesn't
+   become a scroll container (which would break the sticky ticker). */
+html { overflow-x: hidden; }
+body { overflow-x: clip; }
+
 /* Anchor links used to drop section headings behind the fixed header + ticker. */
 section[id], main[id] { scroll-margin-top: 8rem; }
 
@@ -74,8 +81,9 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
 @media (max-width: 1023px) {
     .nav-list {
         transform: translateX(100vw);
-        transition: transform 0.8s ease, opacity 0.8s ease;
+        transition: transform 0.8s ease, opacity 0.8s ease, visibility 0s linear 0.8s;
         opacity: 0;
+        visibility: hidden;
     }
     .nav-list li a {
         opacity: 0;
@@ -85,6 +93,8 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
     .nav-menu-open .nav-list {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
+        transition: transform 0.8s ease, opacity 0.8s ease, visibility 0s;
     }
     .nav-menu-open .nav-list li a {
         opacity: 1;
@@ -109,6 +119,8 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
     list-style: none;
     margin: 0;
     padding: 0;
+    /* The slides zoom to 106%; keep that inside the hero instead of widening the page. */
+    overflow: hidden;
 }
 
 .slideshow li {
