@@ -286,6 +286,8 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
     min-width: 3.25rem;
     padding: 0.3rem 0.5rem;
     line-height: 1.1;
+    /* "SAT 2026" wraps in the narrow mobile column; keep both lines centred. */
+    text-align: center;
 }
 
 .gig-date__day {
@@ -300,6 +302,7 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.15em;
+    margin-right: -0.15em; /* cancel trailing letter-spacing so it centres */
     text-transform: uppercase;
     color: #fff;
     margin-top: 0.15rem;
@@ -308,6 +311,7 @@ html.is-scrolling { scrollbar-color: rgba(255,255,255,0.4) transparent; }
 .gig-date__year {
     font-size: 0.55rem;
     letter-spacing: 0.1em;
+    margin-right: -0.1em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.55);
     margin-top: 0.2rem;
